@@ -120,6 +120,41 @@ class VacatureBank extends Database {
     }
   }
 
+  public function voegFunctieToe($post){
+    if($this->nieuweFunctie($post['functie'])){   
+        $stmt = $this->db->prepare("INSERT INTO `functies`(`functienaam`) VALUES (?)");
+        try{
+          $result = $stmt->execute(array($post['functie']));
+          echo json_encode(true);
+          $this->log(__METHOD__ . " " . __LINE__ . " " . " Nieuwe functie toegevoegd" . $e->getMessage(), "Events"); 
+        }catch(PDOException $e){
+          $this->log(__METHOD__ . " " . __LINE__ ." Functie toevoeging mislukt" . $e->getMessage(), "errors");
+          echo json_encode(false);
+        }
+    }else{
+      echo "duplicate";
+    }
+  }
+  /*Checks for duplicate data*/
+  public function nieuweFunctie($functie){
+    $stmt = $this->db->prepare("SELECT * FROM `functies` where `functienaam` = ? ");
+    try{
+      $stmt->execute(array($functie));
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      if($result){
+        $this->log("not unique \n" . json_encode($result) , "nieuew functie");
+        return false;
+      }else{
+        $this->log("unique", "nieuew functie");
+        return true;
+      }
+    }catch(PDOException $e){
+          $this->log(__METHOD__ . " " . __LINE__ ." Functie duplicate check mislukt" . $e->getMessage(), "errors");
+          echo json_encode(false);
+    }
+  }
+
   public function apply($post){
     if($this->applicationUniqueCheck($post['vacatureID'])){
       $query = 'INSERT INTO `sollicitatie`(`sollicitantID`, `vacatureID`, `datum`, `status`) VALUES (:1, :2,:3,:4)';

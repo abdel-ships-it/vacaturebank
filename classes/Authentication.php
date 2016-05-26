@@ -207,7 +207,7 @@ class Authentication extends Database {
       if($result){
         return true;
       }else{
-        echo $this->log($email . "does not exist, but requested a new password", "events");
+        echo $this->log($email . " does not exist, but requested a new password", "events");
         return false;
       }  
     }catch(PDOException $e){

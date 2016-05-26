@@ -65,6 +65,7 @@
 			    	case 'fetchAllCompanies' : $vacatureBank->fetchAllCompanies();break;
 			    	case 'fetchVacancyPerApplicant' : $vacatureBank->fetchVacancyPerApplicant();break;
 			    	case 'registerAdmin' : $Authentication->registerAdmin($_POST);break;
+			    	case 'voegFunctieToe' : $vacatureBank->voegFunctieToe($_POST);break;
 		    	}
 		    }
 

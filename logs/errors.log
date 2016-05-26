@@ -1,3 +1,0 @@
-
-[26-May-2016 14:38:53] Authentication::registerAdmin  | Registering admin error
-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'emal' in 'field list'

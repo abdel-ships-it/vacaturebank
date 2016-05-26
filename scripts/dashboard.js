@@ -1374,4 +1374,29 @@ app
                     toast('Wachtwoord is verplicht');
                 }
              }
+
+             $scope.voegFunctieToe = function(){
+                $.ajax({
+                    type: "POST",
+                    url: './index.php',
+                    data:{
+                        action: "voegFunctieToe",
+                        admin: true,
+                        functie: $("#functieNaam").val()
+                    }
+                }).then(function(data){
+                    var data = data.trim();
+                    console.log(data);
+                    if(data === "true"){
+                        toast('Functie toegevoegd');
+                    }
+                    if(data === "false"){
+                        toast('Functie niet toegevoegd')
+                    }
+                    if(data === "duplicate"){
+                        toast('Functie bestaat al');
+                    }
+
+                })
+             }
     }]);
