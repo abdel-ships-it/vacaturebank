@@ -177,13 +177,16 @@ class VacatureBank extends Database {
 
 
   public function fetchVacancyPerApplicant(){
-    $query = 'SELECT * from bedrijf, sollicitant
+    $query = 'SELECT sollicitant.sollicitantID, sollicitant.userID, sollicitant.Voornaam, 
+    sollicitant.achternaam,  
+    vacatures.vacatureID,vacatures.titel from sollicitant
     join sollicitatie on sollicitatie.sollicitantID = sollicitant.sollicitantID 
     join vacatures on vacatures.vacatureID = sollicitatie.vacatureID 
-    join functies on vacatures.functieID = functies.functieID';
+    join functies on vacatures.functieID = functies.functieID
+    join bedrijf on bedrijf.bedrijfID = vacatures.bedrijfID';
     $stmt = $this->db->prepare($query);
     try{
-      $stmt->execute(array($_SESSION['bedrijfID']));
+      $stmt->execute();
       $replies = $stmt->fetchAll(PDO::FETCH_ASSOC);
       echo json_encode($replies);
       $this->log(json_encode($replies), "debugging");

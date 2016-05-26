@@ -603,3 +603,7 @@ a.delete{
   color:green;
   font-size:3em;
 }
+
+#vacanciesPerApplicant h6{
+  cursor: pointer;
+}

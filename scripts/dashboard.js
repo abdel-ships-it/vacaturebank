@@ -413,8 +413,9 @@ app
                 });
                 if (valid == 4) {
                     if ($("#password").val() !== $("#passwordRepeat").val()) {
-                        $(".passwordContainer").toggleClass("is-invalid");
+                        $(".passwordContainer").addClass("is-invalid");
                     } else {
+                        $(".passwordContainer").removeClass("is-invalid");
                         $.ajax({
                             type: "POST",
                             url: './index.php',
@@ -586,7 +587,7 @@ app
 
             });
 
-            //Listing admins, reading admins, admins data
+            //Listing admins, reading admins, admins data, future release
             var listAdmins = function(){
                 $.ajax({
                     type: "POST",
@@ -1197,7 +1198,7 @@ app
                     var data = data.trim();
                     console.log(data);
                     if(data !== "false"){
-                       toast('Vacatures geladen');
+                       toast('Sollicitaties geladen');
                        $scope.vacancies = $scope.formatArray(JSON.parse(data), "Voornaam");
                     }else{
                         toast('Server error');
@@ -1209,7 +1210,8 @@ app
                 $scope.requestedUserID = userID;
                 $state.transitionTo('Dashboard.sollicitanten');
              }
-             $scope.keyUpsHandler = function(keycode){
+
+             /*  $scope.keyUpsHandler = function(keycode){
                 
                 switch(keycode){
                     case 27:
@@ -1218,7 +1220,7 @@ app
                         $(".hide").fadeToggle();
                     break;
                 }
-             }
+             }*/
 
              $scope.fetchAllCompanies = function(){
                 $.ajax({
@@ -1335,6 +1337,41 @@ app
 
 
              $scope.registerAdmin = function(){
+                console.log($("#email").val());
                 
+                if ($("#password").val() !== $("#passwordRepeat").val()) {
+                    $(".passwordContainer").addClass("is-invalid");
+                } else if($("#email").val() && $("#password").val()){
+                    $(".passwordContainer").removeClass("is-invalid");
+                    $(".emailContainer").removeClass("is-invalid");
+
+                    $.ajax({
+                        type: "POST",
+                        url: './index.php',
+                        data:{
+                            action: "registerAdmin",
+                            admin: true,
+                            email: $("#email").val(),
+                            password: $("#password").val(),
+                            profielFoto: ""
+                        }
+                    }).then(function(data){
+                        var data = data.trim();
+                        console.log(data);
+                        if(data === "true"){
+                            toast('Admin Toegevoegd');
+                        }
+                        if(data === "false"){
+                            toast('Server Error');
+                        }
+                        if(data === "duplicate"){
+                            toast('Admin bestaat al');
+                        }
+                    });
+                }else if(!$("#email").val()){
+                    $(".emailContainer").addClass("is-invalid");
+                }else if(!$("#password").val()){
+                    toast('Wachtwoord is verplicht');
+                }
              }
     }]);

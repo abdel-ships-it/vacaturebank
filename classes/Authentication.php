@@ -256,7 +256,24 @@ class Authentication extends Database {
   }
 
   public function registerAdmin($post){
-    
+    if(!$this->checkUser($post['email'])){
+      $query = 'INSERT INTO `users`(`email`, `password`, `userType`, `date`) VALUES (:1,:2,:3,:4)';
+      $stmt = $this->db->prepare($query);
+      try{
+        $stmt->execute(array(":1"=>$post['email'], ":2"=> hash('sha256', $post['password'] . $this->salt), ":3"=> "admin", ":4"=> time()));
+        echo json_encode(true);
+      }catch(PDOException $e){
+        $this->log(__METHOD__ . " " . " | Registering admin error\n" . $e->getMessage(), "errors");
+        echo json_encode(false);
+        /*Ask meneer sanchez*/
+        return false;
+      }
+    }else{
+      echo "duplicate";
+      $this->log("duplicate", "registerAdmin");      
+    }
+
+    $this->log(json_encode($post), "registerAdmin");
   }
    
 }

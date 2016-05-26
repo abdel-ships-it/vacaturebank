@@ -26,12 +26,11 @@
 	<h4>Geen reacties op dit moment</h4>
 </div>
 
-<div ng-repeat="(key, data) in vacancies" ng-if="userData.userType == 'admin'">
-	<h6>{{key}}</h6>
-
-	<ul class="mdl-list reacties">
+<div ng-repeat="(key, data) in vacancies" ng-if="userData.userType == 'admin'" id="vacanciesPerApplicant">
+	<h6 ng-click="goToUser(data[0].userID)">{{key}} {{data[0].achternaam}}</h6>
+	<ul class="mdl-list">
 	      <li class="mdl-list__item"  ng-repeat="(key, userData) in data" ng-init="$last ? loaded() : null">
-	        <span class="mdl-list__item-primary-content"  ng-click="goToUser(userData.userID)">
+	        <span class="mdl-list__item-primary-content">
 	          <i class="material-icons  mdl-list__item-avatar">store</i>
 	          {{userData.bedrijfNaam}} | {{userData.titel}}
 	        </span>
