@@ -1,0 +1,44 @@
+<div id="vacatureProgress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <i class="mdl-textfield__icon material-icons">search</i>
+    <input class="mdl-textfield__input" type="text" id="postSearch" ng-model="vacatureFilter"/>
+    <label class="mdl-textfield__label" for="postSearch">Zoek post</label>
+</div>
+
+<div id="vacaturesContainer">
+  
+  <div class="mdl-card mdl-shadow--2dp vacatureCard" ng-repeat="vacature in vacatures | filter:vacatureFilter" ng-init="$last ? loaded() : null">
+    <div class="mdl-card__title">
+      <h2 class="mdl-card__title-text" title='{{vacature.titel}}'>{{vacature.titel}}</h2>
+    </div>
+  
+    <div class="mdl-card__supporting-text">
+     <p>Beschrijving: <br>{{vacature.beschrijving | limitTo:100}}
+      <a ng-if="vacature.beschrijving.length > 100" ng-click="readMore($index)">Lees meer</a>
+     </p>
+      
+     <p>Eisen: <br>{{vacature.eisen | limitTo:100}}
+      <a ng-if="vacature.eisen.length > 100" ng-click="readMore($index)">Lees meer</a>
+     </p>
+      
+     <p><b>Salaris: </b>€{{vacature.salaris}}</p>
+     <p>Functie: {{vacature.functienaam}}</p>
+    </div>
+  
+    <div class="mdl-card__actions mdl-card--border">
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-if="userData.userType == 'sollicitant' " ng-click="solliciteer(vacature.vacatureID)">
+        Solliciteer
+      </a>
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-if="userData.userType !== 'sollicitant' " ng-click="editVacancy($index)">
+        Wijzigen
+      </a>
+      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect delete" ng-if="userData.userType !== 'sollicitant' " ng-click="deleteVacancy(vacature.vacatureID, $index)">
+        Verwijderen
+      </a>
+    </div>
+  </div>
+  
+
+</div>
+
+

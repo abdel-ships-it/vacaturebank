@@ -1,0 +1,61 @@
+<h4>Beheerder toevoegen</h4>
+
+<div class="registerForm">
+	<!-- Right aligned menu below button -->
+
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+	  <i class="mdl-textfield__icon material-icons">email</i>
+	  <input class="mdl-textfield__input formInput" type="email" id="email" />
+	  <label class="mdl-textfield__label" for="email">Email</label>
+	  <span class="mdl-textfield__error">Email is verplicht</span>
+	</div>
+
+
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label passwordContainer" id="passfieldA">
+	  <i class="mdl-textfield__icon material-icons">vpn_key</i>
+	  <input class="mdl-textfield__input password formInput" type="password" id="password" />
+	  <label class="mdl-textfield__label" for="password">Wachtwoord</label>
+	  <span class="mdl-textfield__error">Wachtwoorden komen niet overeen</span>
+	</div>
+
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label passwordContainer" id="passFieldB">
+	  <i class="mdl-textfield__icon material-icons">vpn_key</i>
+	  <input class="mdl-textfield__input password formInput" type="password" id="passwordRepeat" />
+	  <label class="mdl-textfield__label" for="passwordRepeat">Herhaal wachtwoord</label>
+	  <span class="mdl-textfield__error">Wachtwoorden komen niet overeen</span>
+	</div>
+
+
+	<button ng-click="registerAdmin()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+	 Registreer 
+	</button>
+
+</div>
+
+<h4 style="display: none;">Huidige beheerders</h4>
+
+<div id="adminList" style="display: none;">
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+	  <i class="mdl-textfield__icon material-icons">search</i>
+	  <input class="mdl-textfield__input" type="text" id="searchAdmin" ng-model="searchAdmin"/>
+	  <label class="mdl-textfield__label" for="searchAdmin">Zoek beheerder</label>
+	</div>
+
+
+	<li class="mdl-list__item mdl-list__item--three-line" ng-repeat="user in users | filter:searchAdmin">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">person</i>
+          <span ng-if="!editing[$index]">{{user.name}}</span>
+          <!-- <input type="text" ng-model="user.name" ng-if="editing[$index]"> -->
+          <span class="mdl-list__item-text-body"  ng-if="!editing[$index]">
+            {{user.email}} <br> Registered {{user.date}} 
+          </span>
+          <!-- <input type="text" ng-model="user.email" ng-if="editing[$index]">  -->
+        </span>
+        <span class="mdl-list__item-secondary-content">
+          <!-- <i class="material-icons" ng-show="!editing[$index]" ng-click="editing[$index] = true">edit</i> -->
+          <!-- <i class="material-icons" ng-show="editing[$index]" ng-click="editing[$index] = false;editAdmin($index, user.name, user.email)">done<i>/ -->
+        </span>
+      </li>
+	
+</div>

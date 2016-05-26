@@ -1,0 +1,1 @@
+echo $1 | mail -s "$(echo "$2\nContent-Type: text/html")" $3

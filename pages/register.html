@@ -1,0 +1,127 @@
+<link rel="stylesheet" href="./styling/register.css">
+<link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+<div class="upperSheet"></div>
+<div id="card">
+	<div class="header">
+		<h4>Registeratie</h4>
+	</div>
+	<div class="content">
+		<p><p>Ik ben een</p>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="sollicitantRadio">
+			<input type="radio" id="sollicitantRadio" class="mdl-radio__button" name="userType" value="sollicitant" ng-click="choose(true)">
+			<span class="mdl-radio__label">Sollicitant</span>
+		</label>
+		<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="bedrijfRadio">
+			<input type="radio" id="bedrijfRadio" class="mdl-radio__button" name="userType" value="bedrijf" ng-click="choose(false)">
+			<span class="mdl-radio__label">Bedrijf</span>
+		</label>
+	</p>
+
+	<div id="commonFields" ng-show="chosen">
+
+		<img ng-src="{{imageUrl}}" alt="Profile picture preview" class="profilePicture">
+
+		<h5>Inlog gegevens</h5>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+		  <input class="mdl-textfield__input formInput" type="email" id="email" />
+		  <label class="mdl-textfield__label" for="email">Email</label>
+		  <span class="mdl-textfield__error">Email is verplicht</span>
+		</div>
+
+	
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label passwordContainer verplichtVeld">
+		  <input class="mdl-textfield__input password formInput" type="password" id="password" />
+		  <label class="mdl-textfield__label" for="password">Wachtwoord</label>
+		  <span class="mdl-textfield__error">Wachtwoorden komen niet overeen</span>
+		</div>
+
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label passwordContainer verplichtVeld">
+		  <input class="mdl-textfield__input password formInput" type="password" id="passwordRepeat" />
+		  <label class="mdl-textfield__label" for="passwordRepeat">Herhaal wachtwoord</label>
+		  <span class="mdl-textfield__error">Wachtwoorden komen niet overeen</span>
+		</div>
+		
+		<hr>
+		
+		<form action="#">
+		  Profiel foto
+	      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+	        <label class="mdl-button mdl-js-button mdl-button--icon" for="imageUrlInputs">
+	          <i class="material-icons icon" id="insertLink">insert_link</i>
+	          <div class="mdl-tooltip" for="insertLink">
+	           Gebruik een foto url<br>Optioneel
+	          </div>
+	        </label>
+	        <div class="mdl-textfield__expandable-holder">
+	          <input class="mdl-textfield__input" type="text" id="imageUrlInputs" ng-model="imageUrl">
+	          <label class="mdl-textfield__label" for="sample-expandable">Image url..</label>
+	        </div>
+	      </div>
+	    </form>
+		
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+			<input class="mdl-textfield__input" type="text" id="Adres">
+			<label class="mdl-textfield__label" for="Adres">Adres</label>
+			<span class="mdl-textfield__error">Verplicht veld</span>
+		</div>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+			<input class="mdl-textfield__input" type="text" id="postcode">
+			<label class="mdl-textfield__label" for="postcode">Postcode</label>
+			<span class="mdl-textfield__error">Verplicht veld</span>
+		</div>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+			<input class="mdl-textfield__input" type="text" id="plaats">
+			<label class="mdl-textfield__label" for="plaats">Plaats</label>
+			<span class="mdl-textfield__error">Verplicht veld</span>
+		</div>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+			<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="phoneNumber">
+			<label class="mdl-textfield__label" for="phoneNumber">Telefoon nummer</label>
+			<span class="mdl-textfield__error">Input is geen nummer!</span>
+		</div>
+		<br>
+	</div>
+	
+	
+	<div id="sollicitant" ng-show="sollicitant && chosen">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+			<input class="mdl-textfield__input" type="text" id="voornaam">
+			<label class="mdl-textfield__label" for="voornaam">Voornaam</label>
+			<span class="mdl-textfield__error">Verplicht veld</span>
+		</div>
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+			<input class="mdl-textfield__input" type="text" id="achternaam">
+			<label class="mdl-textfield__label" for="achternaam">Achternaam</label>
+			<span class="mdl-textfield__error">Verplicht veld</span>
+		</div>
+		<p class="formLabels">Geslacht</p>
+		<p>
+			<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="female">
+				<input type="radio" id="female" class="mdl-radio__button" name="gender" value="vrouw">
+				<span class="mdl-radio__label">Vrouw</span>
+			</label>
+			<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="male">
+				<input type="radio" id="male" class="mdl-radio__button" name="gender" value="man">
+				<span class="mdl-radio__label">Man</span>
+			</label>
+		</p>
+		<p class="formLabels" style="margin:0;">Vertel iets over jou!</p>
+			<div class="mdl-textfield mdl-js-textfield">
+				<textarea class="mdl-textfield__input" type="text" rows= "3" id="beschrijving" ></textarea>
+				<label class="mdl-textfield__label" for="beschrijving">Ik ben een...</label>
+			</div>
+	</div>
+	<div id="bedrijf" ng-show="!sollicitant && chosen">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+			<input class="mdl-textfield__input" type="text" id="bedrijfNaam">
+			<label class="mdl-textfield__label" for="bedrijfNaam">Bedrijf naam</label>
+			<span class="mdl-textfield__error">Verplicht veld</span>
+		</div>
+	</div>
+	
+	<button id="submitForm" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ng-click="registerUser()" ng-show="chosen">
+		Registreer
+	</button>
+	
+</div>
+</div>

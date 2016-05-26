@@ -1,0 +1,80 @@
+<!-- <img id="logo" src="./images/Logo.png" alt="Logo"> -->
+<div id="loginCard" class="mdl-card mdl-shadow--2dp card" ng-keyup="keyUpsHandler($event.keyCode)">
+<div id="progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+	<div class="mdl-card__title">
+		<h2 class="mdl-card__title-text">Inloggen</h2>
+		<!-- <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored" title="Wachtwoord vergeten" ng-click="triggerForgot()">
+		  <i class="material-icons">report_problem</i>
+		</button> -->
+		<button id="loginMenu" class="mdl-button mdl-js-button mdl-button--icon" style="float:right">
+		  <i class="material-icons">more_vert</i>
+		</button>
+
+		<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+		    for="loginMenu">
+		  <li class="mdl-menu__item" ng-click="adminLogin()">Admin login</li>
+		  <li class="mdl-menu__item" ng-click="normalLogin()">Normal login</li>
+		  <li class="mdl-menu__item" ng-click="triggerForgot()">Forgot password</li>
+		</ul>
+	</div>
+	
+	<div class="mdl-card__supporting-text">
+		
+		  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label emailWrapper">
+		    <input class="mdl-textfield__input" type="email" id="email" name="email">
+		    <label class="mdl-textfield__label" for="email">Vul uw e-mail</label>
+		     <span class="mdl-textfield__error">Verplicht veld</span>
+		  </div>
+		  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-hide="forgetPassword">
+		    <input class="mdl-textfield__input" type="password" name="password" id="password" ng-keyup="$event.keyCode == 13 ? login() : ''" >
+		    <label class="mdl-textfield__label" for="password">Wachtwoord</label>
+		  </div>
+
+		  <div ng-hide="forgetPassword || adminSelected">
+			  <span>Ik ben</span>
+			  <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect choice" for="bedrijfRadBtn">
+			    <input type="radio" id="bedrijfRadBtn" class="mdl-radio__button" name="userType" value="Bedrijf" checked>
+			    <span class="mdl-radio__label">Bedrijf</span>
+			  </label>	
+			   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect choice" for="sollicitantRadbtn">
+			    <input type="radio" id="sollicitantRadbtn" class="mdl-radio__button" name="userType" value="Sollicitant">
+			    <span class="mdl-radio__label">Sollicitant</span>
+			  </label>	
+			   <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect adminRadBtn" for="adminRadBtn">
+			    <input type="radio" id="adminRadBtn" class="mdl-radio__button" name="userType" value="Admin">
+			    <span class="mdl-radio__label"></span>
+			  </label>				
+
+		  </div>
+		  	<span ng-show="adminSelected">U logt nu in als admin</span>
+
+	  	  <button id="aanvragen" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+	  	   ng-click="forgotPassword()">
+	  	    aanvragen
+	  	  </button>
+
+		  		
+	</div>
+
+	<div class="mdl-card__actions mdl-card--border">
+		<a id="action" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="login()">
+			Inloggen
+		</a>
+	</div>
+	<div id="loginError" class="mdl-card mdl-shadow--2dp card">
+		<div class="mdl-card__supporting-text">
+			Het opgegeven e-mailadres en wachtwoord komen niet overeen.
+		</div>
+	</div>
+</div>
+
+<!-- 
+<button id="loginMenu" class="mdl-button mdl-js-button mdl-button--icon" style="float:right">
+  <i class="material-icons">more_vert</i>
+</button>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+    for="loginMenu">
+  <li class="mdl-menu__item">Admin login</li>
+  <li class="mdl-menu__item">Normal login</li>
+</ul> -->

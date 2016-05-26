@@ -1,0 +1,48 @@
+<div ng-repeat="(key, data) in replies" ng-if="userData.userType == 'bedrijf'">
+	<h6>{{key}}</h6>
+
+	<ul class="mdl-list reacties">
+	      <li class="mdl-list__item"  ng-repeat="(key, data) in data" ng-init="$last ? loaded() : null">
+	        <span class="mdl-list__item-primary-content"  ng-click="goToUser(data.userID)">
+	          <i class="material-icons  mdl-list__item-avatar">person</i>
+	          {{data.Voornaam}} {{data.achternaam}}
+	        </span>
+	        <span class="mdl-list__item-secondary-content">
+		        <span class="mdl-list__item-secondary-info" ng-if="$first">Geaccepteerd</span>
+		        <span class="mdl-list__item-secondary-action">
+	          
+		          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="{{data.datum}}">
+		            <input type="checkbox" id="{{data.datum}}" class="mdl-checkbox__input" 
+		            ng-checked="data.status == 'accepted'" ng-click="replyToVacancy(data.sollicitatieID, data.status)"/>
+		          </label>
+		        </span>
+	        </span>
+	      </li>
+	</ul>
+</div>
+
+<div id="notificationsEmptyState" ng-hide="userData.userType === 'admin' ">
+	<i class="material-icons">notifications_none</i>
+	<h4>Geen reacties op dit moment</h4>
+</div>
+
+<div ng-repeat="(key, data) in vacancies" ng-if="userData.userType == 'admin'">
+	<h6>{{key}}</h6>
+
+	<ul class="mdl-list reacties">
+	      <li class="mdl-list__item"  ng-repeat="(key, userData) in data" ng-init="$last ? loaded() : null">
+	        <span class="mdl-list__item-primary-content"  ng-click="goToUser(userData.userID)">
+	          <i class="material-icons  mdl-list__item-avatar">store</i>
+	          {{userData.bedrijfNaam}} | {{userData.titel}}
+	        </span>
+	        <span class="mdl-list__item-secondary-content">
+		        
+		        <span class="mdl-list__item-secondary-action">
+	
+		        </span>
+	        </span>
+	      </li>
+	</ul>
+</div>
+
+

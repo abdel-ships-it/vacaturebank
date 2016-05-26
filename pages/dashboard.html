@@ -1,0 +1,68 @@
+<body>
+  <div class="layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+    <header class="header mdl-layout__header mdl-color--blue-grey-800 mdl-color-text--blue-grey-50">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title" ng-bind='state.current.data.childTitle'></span>
+        <i ng-if="updatingVacancy" class="material-icons" id="cancelPostEdit" ng-click="cancelEditPost()">cancel</i>
+        <div class="mdl-layout-spacer"></div>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="dropdown">
+        <i class="material-icons">more_vert</i>
+        </button>
+        <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="dropdown">
+          <li class="mdl-menu__item">Website</li>
+          <li class="mdl-menu__item" ng-click="contactMe()">Contact opnemen</li>
+          <li class="mdl-menu__item" ng-click="logout()">Uitloggen</li>
+        </ul>
+      </div>
+    </header>
+    <div class="drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+      <header class="drawer-header">
+        <!--  <img src="images/user.jpg" class="avatar"> -->
+        <!-- <i class="material-icons">account_circle</i> -->
+        <img class="profilePicture" ng-src="{{userData.profielFoto}}">
+        <span ng-if="userData.userType === 'sollicitant'" title="{{userData.email}}">{{userData.email | limitTo:20}}</span>
+        <span ng-if="userData.userType === 'bedrijf'" title="{{userData.email}}">{{userData.bedrijfNaam | limitTo:20}}</span>
+        
+      </header>
+      <nav class="navigation mdl-navigation mdl-color--blue-grey-800">
+        <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ui-sref=".">
+          <i class="mdl-color-text--blue-grey-400 material-icons">home</i>Thuis
+        </a>
+        <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ng-if="userData.userType === 'bedrijf'" ui-sref=".schrijven">
+          <i class="mdl-color-text--blue-grey-400 material-icons">create</i>Vacature maken
+        </a>
+         <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ui-sref=".vacatures">
+          <i class="mdl-color-text--blue-grey-400 material-icons">view_list</i>
+          <span>{{userData.userType === 'bedrijf' ? 'Mijn Vacatures' : 'Vacatures'}}</span> 
+        </a>
+        <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ng-if="userData.userType !== 'sollicitant'" ui-sref=".sollicitanten">
+          <i class="mdl-color-text--blue-grey-400 material-icons">account_box</i><span>Sollicitanten</span>
+        </a>
+        <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ng-if="userData.userType !== 'sollicitant'" ui-sref=".reacties">
+          <i class="mdl-color-text--blue-grey-400 material-icons">notifications</i><span>Reacties</span>
+        </a>
+      
+        
+        <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ng-if="userData.userType === 'admin' " ui-sref=".admins">
+          <i class="mdl-color-text--blue-grey-400 material-icons">person_add</i>Beheerders
+        </a>
+        <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ui-sref=".mijnGegevens">
+          <i class="mdl-color-text--blue-grey-400 material-icons">account_circle</i>Mijn gegevens
+        </a>
+        <a class="mdl-navigation__link mdl-button mdl-js-button mdl-js-ripple-effect" ng-if="userData.userType === 'admin' " ui-sref=".management">
+          <i class="mdl-color-text--blue-grey-400 material-icons">settings</i>Beheren
+        </a>
+
+      </nav>
+    </div>
+    
+    <main class="mdl-layout__content mdl-color--grey-100" ui-view>
+    
+    </main>
+  </div>
+  
+  <button id="fab" ng-click="mainAction()" ng-if="userData.userType === 'bedrijf'" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+  <i class="material-icons">create</i>
+  </button>
+  
+</body>

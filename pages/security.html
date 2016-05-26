@@ -1,0 +1,113 @@
+<div class="changeInfo">
+	<div id="ChangePassword">
+	<h4>Wachtwoord wijzigen</h4>
+
+	<div id="passfield">
+		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+			  <i class="mdl-textfield__icon material-icons" ng-bind="icon" ng-class="{warning: wrongPass == true, confirm: wrongPass == false}"></i>
+		  <input class="mdl-textfield__input" type="password" id="currentPassword" ng-blur="checkPassword()"/>
+		  <!-- <input class="mdl-textfield__input" type="password" id="currentPassword" ng-blur="checkPassword()" ng-focus="icon='dashboard'"/> -->
+		  <label class="mdl-textfield__label" for="currentPassword">Huidige wachtwoord</label>
+		</div>
+		<div id="spinner" class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+	</div>
+	
+
+
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label passwordContainer" id="passfieldA">
+	  <i class="mdl-textfield__icon material-icons">vpn_key</i>
+	  <input class="mdl-textfield__input password formInput" type="password" id="password"/>
+	  <label class="mdl-textfield__label" for="password">Nieuwe wachtwoord</label>
+	  <span class="mdl-textfield__error">Wachtwoorden komen niet overeen</span>
+	</div>
+
+	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label passwordContainer" id="passFieldB">
+	  <i class="mdl-textfield__icon material-icons">vpn_key</i>
+	  <input class="mdl-textfield__input password formInput" type="password" id="passwordRepeat"/>
+	  <label class="mdl-textfield__label" for="passwordRepeat">Herhaal wachtwoord</label>
+	  <span class="mdl-textfield__error">Wachtwoorden komen niet overeen</span>
+	</div>
+
+
+	<button ng-click="changePassword()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent modify">
+	 Wijzgen  
+	</button>
+	</div>
+
+	<div id="changingPersonalInfo" ng-hide="userData.userType === 'admin'">
+		<h4>Gegevens wijzigen</h4>
+
+			<div id="commonFields">
+				<img ng-src="{{userData.profielFoto}}" alt="Profile picture preview" class="profilePicture">
+
+				
+				<form action="#">
+				  Profiel foto
+			      <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+			        <label class="mdl-button mdl-js-button mdl-button--icon" for="imageUrlInputs">
+			          <i class="material-icons icon" id="insertLink">insert_link</i>
+			          <div class="mdl-tooltip" for="insertLink">
+			           Gebruik een foto url<br>Optioneel
+			          </div>
+			        </label>
+			        <div class="mdl-textfield__expandable-holder">
+			          <input class="mdl-textfield__input" type="text" id="imageUrlInputs" ng-model="imageUrl">
+			          <label class="mdl-textfield__label" for="sample-expandable">Image url..</label>
+			        </div>
+			      </div>
+			    </form>
+				
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+					<input class="mdl-textfield__input" type="text" id="Adres" ng-value="userData.adres">
+					<label class="mdl-textfield__label" for="Adres">Adres</label>
+					<span class="mdl-textfield__error">Verplicht veld</span>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+					<input class="mdl-textfield__input" type="text" id="postcode" ng-value="userData.postcode">
+					<label class="mdl-textfield__label" for="postcode">Postcode</label>
+					<span class="mdl-textfield__error">Verplicht veld</span>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+					<input class="mdl-textfield__input" type="text" id="plaats" ng-value="userData.plaats">
+					<label class="mdl-textfield__label" for="plaats">Plaats</label>
+					<span class="mdl-textfield__error">Verplicht veld</span>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+					<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="phoneNumber" ng-value="userData.telefoon">
+					<label class="mdl-textfield__label" for="phoneNumber">Telefoon nummer</label>
+					<span class="mdl-textfield__error">Input is geen nummer!</span>
+				</div>
+				<br>
+			</div>
+			<div id="sollicitant" class="temporaryHidden">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+					<input class="mdl-textfield__input" type="text" id="voornaam" ng-value="userData.Voornaam">
+					<label class="mdl-textfield__label" for="voornaam">Voornaam</label>
+					<span class="mdl-textfield__error">Verplicht veld</span>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+					<input class="mdl-textfield__input" type="text" id="achternaam" ng-value="userData.achternaam">
+					<label class="mdl-textfield__label" for="achternaam">Achternaam</label>
+					<span class="mdl-textfield__error">Verplicht veld</span>
+				</div>
+
+			</div>
+			<div id="bedrijf" class="temporaryHidden">
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label verplichtVeld">
+					<input class="mdl-textfield__input" type="text" id="bedrijfNaam" ng-model="newUserData" ng-value="userData.bedrijfNaam">
+					<label class="mdl-textfield__label" for="bedrijfNaam">Bedrijf naam</label>
+					<span class="mdl-textfield__error">Verplicht veld</span>
+				</div>
+			</div>
+
+			<button ng-click="modifyPersonalInformation()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent modify">
+			 Wijzgen  
+			</button>
+		</div>
+		
+		
+
+
+	
+
+</div>

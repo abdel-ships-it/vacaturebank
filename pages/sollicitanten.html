@@ -1,0 +1,26 @@
+
+  <div class="mdl-textfield mdl-js-textfield">
+    <input class="mdl-textfield__input" type="text" id="searchUser" ng-model="userSearchFilter" />
+    <label class="mdl-textfield__label" for="searchUser">Gebruiker naam...</label>
+  </div>
+  <button id="resetFilter" ng-show="requestedUserID" ng-click="resetFilter()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+    Reset <i class="material-icons">filter_list</i>    
+  </button>
+      
+
+<ul class="mdl-list">
+  <li class="mdl-list__item mdl-list__item--three-line" ng-repeat="user in users | filter:userSearchFilter | filter:requestedUserID">
+    <span class="mdl-list__item-primary-content">
+      <img class="mdl-list__item-avatar" ng-src="{{user.profielFoto}}" alt="profilepicture">
+      <span>{{user.Voornaam}} {{user.achternaam}}</span>
+      <span class="mdl-list__item-text-body">
+        {{user.beschrijving | limitTo:120}} 
+      </span>
+    </span>
+    <span class="mdl-list__item-secondary-content">
+      <a class="mdl-list__item-secondary-action" ng-href="https://www.google.nl/maps/place/{{user.adres}} + {{user.postcode}}" target="_blank"><i class="material-icons">map</i></a>
+      <!-- <input type="hidden" > -->
+      <i class="material-icons phone" data-clipboard-text="0{{user.telefoon}}">phone</i>
+    </span>
+  </li>
+</ul>

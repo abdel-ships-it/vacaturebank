@@ -1,0 +1,41 @@
+
+<div id="editorTitle" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label blogInputs">
+	<input class="mdl-textfield__input blogInputFields" type="text" id="postTitle">
+	<label class="mdl-textfield__label" for="postTitle">Titel</label>
+	<span class="mdl-textfield__error">Verplicht veld</span>
+</div>
+
+<div id="vacatureExtra">
+
+
+<div class="mdl-textfield mdl-js-textfield salarisField blogInputs">
+    <input class="mdl-textfield__input blogInputFields" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="salaris">
+    <label class="mdl-textfield__label" for="salaris">Salaris</label>
+    <span class="mdl-textfield__error">Verplicht veld</span>
+</div>
+<br>
+
+Functie
+<select id="functieDropdown">
+		<option ng-repeat="function in functions" name="{{function.functieID}}">{{function.functienaam}}</option>
+</select>
+
+  
+
+</div>
+
+
+<div class="mdl-textfield mdl-js-textfield blogInputs vacatureBeschrijving">
+	<textarea class="mdl-textfield__input blogInputFields" type="text" rows="3" id="vacatureBeschrijving"></textarea>
+	<label class="mdl-textfield__label" for="vacatureBeschrijving">Vacature beschrijving...</label>
+	<span class="mdl-textfield__error">Verplicht veld</span>
+</div>
+
+
+<div class="mdl-textfield mdl-js-textfield blogInputs vacatureBeschrijving">
+	<textarea class="mdl-textfield__input blogInputFields" type="text" rows="3" id="vacatureEisen"></textarea>
+	<label class="mdl-textfield__label" for="vacatureEisen">Vacature Eisen...</label>
+	<span class="mdl-textfield__error">Verplicht veld</span>
+</div>
+
+<!-- $(".blogInputs").addClass('is-dirty is-upgraded') -->
