@@ -821,7 +821,11 @@ app
                                     console.log(data);
                                     if (data === "true") {
                                         toast('Geregistreerd');
-                                    } else {
+                                    } 
+                                    if(data === "duplicate"){
+                                        toast('Email al in gebruik');
+                                    }
+                                    else {
                                         toast('Server fout melding');
                                     }
                                 }})

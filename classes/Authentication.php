@@ -12,7 +12,7 @@ class Authentication extends Database {
         $saltedPassword = hash('sha256', $post['password'] . $this->salt);
         
         if($post['userType'] === 'Admin'){
-          $query = "SELECT * from users where users.email = :1 AND users.password = :2";
+          $query = "SELECT * from users where users.email = :1 AND users.password = :2 and users.userType = 'admin'";
           $stmt = $this->db->prepare($query);
           $stmt->execute(array(":1"=> $post['email'], ":2"=> $saltedPassword));
           $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -47,6 +47,10 @@ class Authentication extends Database {
   /*Insert post data in the database*/
   public function register($userData){
       if($this->validateData($userData, __METHOD__) === true){
+        
+        /**/
+        if($this->checkUser($userData['email']) === false){
+
         /*Inserting into users table*/
         $query = 'INSERT INTO `users`(`email`, `password`, `userType`, `date`, `profielFoto`) VALUES (:1,:2,:3,:4,:5)';
         $stmt = $this->db->prepare($query);
@@ -93,6 +97,10 @@ class Authentication extends Database {
         } 
 
       $this->log(json_encode($userData), "debugging");
+      }else{
+        $this->log("Duplicate email", "error");
+        echo "duplicate";
+      }
     }
   }
 
@@ -207,7 +215,7 @@ class Authentication extends Database {
       if($result){
         return true;
       }else{
-        echo $this->log($email . " does not exist, but requested a new password", "events");
+        //echo $this->log($email . " does not exist, but requested a new password", "events");
         return false;
       }  
     }catch(PDOException $e){

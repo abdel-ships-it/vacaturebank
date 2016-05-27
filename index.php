@@ -57,17 +57,18 @@
 		    	/*echo json_encode(false);*/
 		    }
 		    /*Admin actions*/
-		    if(isset($_POST['admin'])){
-		    	switch($_POST['action']){
-		    		case 'deleteCompany' : $vacatureBank->deleteCompany($_POST);break;
-			    	case 'deleteUser': $vacatureBank->deleteUser($_POST);break;
-			    	case 'deleteVacancy' : $vacatureBank->deleteVacancy($_POST);break;
-			    	case 'fetchAllCompanies' : $vacatureBank->fetchAllCompanies();break;
-			    	case 'fetchVacancyPerApplicant' : $vacatureBank->fetchVacancyPerApplicant();break;
-			    	case 'registerAdmin' : $Authentication->registerAdmin($_POST);break;
-			    	case 'voegFunctieToe' : $vacatureBank->voegFunctieToe($_POST);break;
-		    	}
+		    if($_SESSION["userType"] === "admin"){
+		    	    if(isset($_POST['admin'])){
+		    	    	switch($_POST['action']){
+		    	    		case 'deleteCompany' : $vacatureBank->deleteCompany($_POST);break;
+		    		    	case 'deleteUser': $vacatureBank->deleteUser($_POST);break;
+		    		    	case 'deleteVacancy' : $vacatureBank->deleteVacancy($_POST);break;
+		    		    	case 'fetchAllCompanies' : $vacatureBank->fetchAllCompanies();break;
+		    		    	case 'fetchVacancyPerApplicant' : $vacatureBank->fetchVacancyPerApplicant();break;
+		    		    	case 'registerAdmin' : $Authentication->registerAdmin($_POST);break;
+		    		    	case 'voegFunctieToe' : $vacatureBank->voegFunctieToe($_POST);break;
+		    	    	}
+		    	    }
 		    }
-
 	    }
     }
