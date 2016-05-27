@@ -825,7 +825,7 @@ app
                                     if(data === "duplicate"){
                                         toast('Email al in gebruik');
                                     }
-                                    else {
+                                    if(data === "false"){
                                         toast('Server fout melding');
                                     }
                                 }})
