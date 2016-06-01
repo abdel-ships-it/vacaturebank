@@ -192,7 +192,7 @@ class VacatureBank extends Database {
   
 
   public function fetchAllReplies(){
-    $query = 'SELECT sollicitant.sollicitantID, sollicitant.userID, sollicitant.Voornaam, sollicitant.achternaam, sollicitant.beschrijving, sollicitatie.sollicitatieID, vacatures.vacatureID, sollicitatie.status,vacatures.titel from sollicitant
+    $query = 'SELECT vacatures.commisie, sollicitant.sollicitantID, sollicitant.userID, sollicitant.Voornaam, sollicitant.achternaam, sollicitant.beschrijving, sollicitatie.sollicitatieID, vacatures.vacatureID, sollicitatie.status,vacatures.titel from sollicitant
     join sollicitatie on sollicitatie.sollicitantID = sollicitant.sollicitantID 
     join vacatures on vacatures.vacatureID = sollicitatie.vacatureID 
     join functies on functies.functieID = vacatures.functieID
@@ -214,7 +214,7 @@ class VacatureBank extends Database {
   public function fetchVacancyPerApplicant(){
     $query = 'SELECT sollicitant.sollicitantID, sollicitant.userID, sollicitant.Voornaam, 
     sollicitant.achternaam,  
-    vacatures.vacatureID,vacatures.titel from sollicitant
+    vacatures.vacatureID,vacatures.titel, bedrijf.bedrijfNaam from sollicitant
     join sollicitatie on sollicitatie.sollicitantID = sollicitant.sollicitantID 
     join vacatures on vacatures.vacatureID = sollicitatie.vacatureID 
     join functies on vacatures.functieID = functies.functieID

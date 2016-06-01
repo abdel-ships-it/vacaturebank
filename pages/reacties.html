@@ -5,7 +5,7 @@
 	      <li class="mdl-list__item"  ng-repeat="(key, data) in data" ng-init="$last ? loaded() : null">
 	        <span class="mdl-list__item-primary-content"  ng-click="goToUser(data.userID)">
 	          <i class="material-icons  mdl-list__item-avatar">person</i>
-	          {{data.Voornaam}} {{data.achternaam}}
+	          {{data.Voornaam}} {{data.achternaam}}<!--  {{data.commisie}} -->
 	        </span>
 	        <span class="mdl-list__item-secondary-content">
 		        <span class="mdl-list__item-secondary-info" ng-if="$first">Geaccepteerd</span>
@@ -21,7 +21,7 @@
 	</ul>
 </div>
 
-<div id="notificationsEmptyState" ng-hide="userData.userType === 'admin' ">
+<div id="notificationsEmptyState" ng-hide="userData.userType === 'admin'" ng-show="!replies">
 	<i class="material-icons">notifications_none</i>
 	<h4>Geen reacties op dit moment</h4>
 </div>

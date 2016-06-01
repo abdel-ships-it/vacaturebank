@@ -463,35 +463,6 @@ app
                 $(".blogInputFields").val("");
                 $(".blogInputs").removeClass('is-dirty is-upgraded');
             };
-
-            $scope.deleteVacancy = function(vacancyID, index) {
-                console.log(index);
-
-                var decision = confirm("Weet u zeker dat u deze vacature wilt verwijderen?");
-                if (decision == true) {
-                    $.ajax({
-                        type: "POST",
-                        url: './index.php',
-                        data: {
-                            action: "vacatureVerwijderen",
-                            bedrijf: true,
-                            vacatureID: vacancyID
-                        },
-                        success: function(data) {
-                            var data = data.trim();
-                            console.log(data);
-                            if (data === "true") {
-                                $scope.$apply(function() {
-                                    $scope.vacatures.splice(index, 1);
-                                });
-                                toast('Post verwijderd');
-                            }else if(data === "false"){
-                                toast('Post niet verwijderd');
-                            }
-                        }
-                    })
-                }
-            };
             
             $scope.$on('$stateChangeStart', function(){
                 if($state.current.name === "Dashboard.schrijven"){
@@ -543,6 +514,7 @@ app
                 }
                 if($state.current.name === "Dashboard.reacties"){
                     if($scope.userData.userType == "bedrijf"){
+                        console.log('fetching all replies');
                         $scope.fetchAllReplies();
                     }
                     if($scope.userData.userType == "admin"){
@@ -1165,7 +1137,8 @@ app
                         obj[arr[elem][tracker]].push(arr[elem]);
                       }
                 }
-                console.info(Object.keys(obj).length);
+                //console.info(Object.keys(obj).length);
+                //console.info(obj);
                 return obj;
              }
 
@@ -1179,7 +1152,7 @@ app
                     }
                 }).then(function(data){
                     var data = data.trim();
-                    console.log(data);
+                    console.log(JSON.parse(data));
                     if(data !== "false"){
                        toast('Reacties geladen');
                        $scope.replies = $scope.formatArray(JSON.parse(data), "titel");
@@ -1304,34 +1277,72 @@ app
                 }
              }
 
-             $scope.deleteVacancy = function(vacatureID, index){
-                $("#vacatureProgress").show();
-                var confirmation = confirm('Wilt u deze vacature zeker verwijderen?');
-                if(confirmation){
-                    $.ajax({
-                        type: "POST",
-                        url: './index.php',
-                        data: {
-                            action: "deleteVacancy",
-                            admin: true,
-                            vacatureID: vacatureID
-                        }
-                    }).then(function(data){
-                        var data = data.trim();
-                        console.log(data);
-                        if(data !== "false"){
-                           toast('Vacature verwijdered');
-                           $scope.$apply(function(){
-                            $scope.vacatures.splice(index, 1);
-                            $("#vacatureProgress").hide();
-                           });
-                            
-                        }else{
-                            toast('Server error');
-                        }
+          /* $scope.deleteVacancy = function(vacancyID, index) {
+                console.log(index);
 
-                    });
+                var decision = confirm("Weet u zeker dat u deze vacature wilt verwijderen?");
+                
+            };
+            */
+             $scope.deleteVacancy = function(vacancyID, index){
+         
+                var confirmation = confirm('Wilt u deze vacature zeker verwijderen?');
+
+                if($scope.userData.userType === 'bedrijf'){
+                    if (confirmation == true) {
+                        $.ajax({
+                            type: "POST",
+                            url: './index.php',
+                            data: {
+                                action: "vacatureVerwijderen",
+                                bedrijf: true,
+                                vacatureID: vacancyID
+                            },
+                            success: function(data) {
+                                var data = data.trim();
+                                console.log(data);
+                                if (data === "true") {
+                                    $scope.$apply(function() {
+                                        $scope.vacatures.splice(index, 1);
+                                    });
+                                    toast('Vacature verwijderd');
+                                }else if(data === "false"){
+                                    toast('Vacature niet verwijderd');
+                                }
+                            }
+                        })
+                    }
                 }
+
+                if($scope.userData.userType === 'admin'){
+                    if(confirmation){
+                        $.ajax({
+                            type: "POST",
+                            url: './index.php',
+                            data: {
+                                action: "deleteVacancy",
+                                admin: true,
+                                vacatureID: vacancyID
+                            }
+                        }).then(function(data){
+                            var data = data.trim();
+                            console.log(data);
+                            if(data !== "false"){
+                               toast('Vacature verwijdered');
+                               $scope.$apply(function(){
+                                $scope.vacatures.splice(index, 1);
+                                $("#vacatureProgress").hide();
+                               });
+                                
+                            }else{
+                                toast('Server error');
+                            }
+
+                        });
+                    }
+                }
+
+                
              }
 
              $scope.resetFilter = function(){

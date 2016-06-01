@@ -590,6 +590,7 @@ a.delete{
 #notificationsEmptyState{
   text-align: center;
   width:100%;
+  display:none;
 }
 #notificationsEmptyState .material-icons{
     font-size: 15em;

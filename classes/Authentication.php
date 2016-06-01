@@ -224,7 +224,6 @@ class Authentication extends Database {
     
   }
 
-
   public function forgotPassword($email){    
     if($this->checkUser($email)){
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
