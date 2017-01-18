@@ -1,5 +1,10 @@
 # vacaturebank
 
+##Note
+
+While this project is a part of portfolio, I wouldn't recommend using any of the AJAX patterns in vacaturebank/scripts/dashboard.js as they are pretty much anti pattern. If you're working on an angular 1.x project and you're looking to communicate with a backend. Make sure you use the [http](https://docs.angularjs.org/api/ng/service/$http) service and try to stay away from jQuery as it goes against the angular mindset.
+
+
 ##Setup
 ---
 Import vacaturebank.sql
