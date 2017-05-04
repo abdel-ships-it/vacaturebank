@@ -1,16 +1,16 @@
 # vacaturebank
 
-##Note
+## Note
 
 While this project is a part of portfolio, I wouldn't recommend using any of the AJAX patterns in [vacaturebank/scripts/dashboard.js](https://github.com/realappie/vacaturebank/blob/master/scripts/dashboard.js) as they are pretty much anti pattern. If you're working on an angular 1.x project and you're looking to communicate with a backend. Make sure you use the [http](https://docs.angularjs.org/api/ng/service/$http) service and try to stay away from jQuery as it goes against the angular mindset.
 
 
-##Setup
+## Setup
 ---
 Import vacaturebank.sql
 Change database credentials under classes/database.php
 
-#####Test accounts
+##### Test accounts
 
 | User type        | Email       | password | 
 | ------------- |:-------------:| :-------------: |
@@ -18,13 +18,13 @@ Change database credentials under classes/database.php
 | Applicant | Applicant@gmail.com  | test  |      
 | Company |   Company@gmail.com     | test |
 
-####Notes
+#### Notes
 ---
 - Forgetting password script won't work on a non linux machine, line 245 @ classes/Authentication.php needs to be modified with the server supported mail command.
 - If you need gulp or livereload, you can install all the development dependencies using the npm install command & then run gulp
 - Looking back at this application, its certainly one of the biggest one I have created. But I see a lot of potential bugs in my code and I am not doing everything in the best possible way which (I am talking about my JS code)
 
-####Description
+#### Description
 ---
 This is a school assigment where I had to create a web application where companies would post vacancies that applicants would then apply on. 
 
